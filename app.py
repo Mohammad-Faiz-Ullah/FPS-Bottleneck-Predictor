@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import joblib
 
 # --- 1. CONFIGURATION ---
 st.set_page_config(page_title="NVIDIA/AMD FPS Estimator", page_icon="🎮", layout="centered")
@@ -70,7 +71,7 @@ def load_data():
     gpu_df = pd.read_csv('gpu_specs_lookup.csv')
     cpu_df = pd.read_csv('cpu_specs_lookup.csv')
 
-    with open('fps_model.pkl', 'rb') as f: model = pickle.load(f)
+    with open('fps_model.pkl', 'rb') as f: model = joblib.load(f)
     with open('game_encoder.pkl', 'rb') as f: game_encoder = pickle.load(f)
     with open('model_columns.pkl', 'rb') as f: model_columns = pickle.load(f)
 
@@ -184,4 +185,5 @@ if st.button("🚀 Analyze Performance", type="primary"):
     elif final_fps > 200:
         st.success(f"⚡ **Maximum Performance:** Your rig is crushing {selected_game_pretty}!")
     else:
+
         st.info("✅ **Balanced Build:** CPU and GPU are well matched.")
