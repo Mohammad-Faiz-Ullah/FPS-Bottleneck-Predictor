@@ -68,12 +68,12 @@ def clean_hardware_name(text):
 @st.cache_data
 def load_data():
     # Loading raw files
-    gpu_df = pd.read_csv('gpu_specs_lookup.csv')
-    cpu_df = pd.read_csv('cpu_specs_lookup.csv')
+    gpu_df = pd.read_csv('assets/gpu_specs_lookup.csv')
+    cpu_df = pd.read_csv('assets/cpu_specs_lookup.csv')
 
-    with open('fps_model.pkl', 'rb') as f: model = joblib.load(f)
-    with open('game_encoder.pkl', 'rb') as f: game_encoder = pickle.load(f)
-    with open('model_columns.pkl', 'rb') as f: model_columns = pickle.load(f)
+    with open('assets/fps_model.pkl', 'rb') as f: model = joblib.load(f)
+    with open('assets/game_encoder.pkl', 'rb') as f: game_encoder = pickle.load(f)
+    with open('assets/model_columns.pkl', 'rb') as f: model_columns = pickle.load(f)
 
     # Cleaning Hardware Names immediately
     gpu_df['GpuName'] = gpu_df['GpuName'].apply(clean_hardware_name)
@@ -187,3 +187,4 @@ if st.button("🚀 Analyze Performance", type="primary"):
     else:
 
         st.info("✅ **Balanced Build:** CPU and GPU are well matched.")
+
