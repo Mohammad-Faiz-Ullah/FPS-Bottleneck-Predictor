@@ -144,11 +144,13 @@ if st.button("🚀 Analyze Performance", type="primary"):
     input_data['GameResolution_Enc'] = 2
 
     # 3. Align Columns
-    input_df = pd.DataFrame(columns=model_columns)
-    input_df.loc[0] = 0
-    for col in model_columns:
-        if col in input_data:
-            input_df.loc[0, col] = input_data[col]
+    input_df = pd.DataFrame([input_data])
+    input_df = input_df.reindex(columns=model_columns, fill_value=0)
+    # input_df = pd.DataFrame(columns=model_columns)
+    # input_df.loc[0] = 0
+    # for col in model_columns:
+    #     if col in input_data:
+    #         input_df.loc[0, col] = input_data[col]
 
     # 4. Predict
     base_fps = model.predict(input_df)[0]
